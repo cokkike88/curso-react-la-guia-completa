@@ -1,0 +1,11 @@
+version: '3.7'
+services: 
+    buscador-bebidas: 
+        container_name: buscador-bebidas
+        image: node
+        ports: 
+            - "5566:5566"
+        volumes: 
+            - $PWD:/web
+        working_dir: /web
+        command: npm start

@@ -1,0 +1,11 @@
+version: '3.7'
+services: 
+    buscador-letras-artistas: 
+        container_name: buscador-letras-artistas
+        image: node
+        ports: 
+            - "5566:5566"
+        volumes: 
+            - $PWD:/web
+        working_dir: /web
+        command: npm start
