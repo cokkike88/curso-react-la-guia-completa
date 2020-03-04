@@ -35,19 +35,23 @@ const crearTarea = async(req, res) => {
 
 const obtenerTareas = async(req, res) => {
     try {
-        console.log(req.body);
+        // console.log('obtenerTareas', req.query);
+        // console.log(req.params.proyecto);
 
-        let proyecto = await Proyecto.findById(req.params.proyectoId);
+        const {proyecto} = req.query;
 
-        if(!proyecto){
+        let proyectoExiste = await Proyecto.findById(proyecto).sort({creado: -1});
+
+        if(!proyectoExiste){
             return res.status(404).json({msg: 'Proyecto no encontrado'});
         }
 
-        if(proyecto.creador.toString() !== req.usuario.id){
+        if(proyectoExiste.creador.toString() !== req.usuario.id){
             return res.status(401).json({msg: 'No autorizado'});
         }
 
-        const tareas = await Tarea.find({proyecto: req.params.proyectoId});
+        const tareas = await Tarea.find({proyecto});
+        // console.log('resultado obenerTareas', tareas);
         res.status(200).json({tareas});
     } catch (error) {
         console.log(error);
@@ -93,9 +97,8 @@ const actualizarTarea = async(req, res) => {
 
 const eliminarTarea = async(req, res) => {
     try {
-        const {proyecto} = req.body;
-        const jsonProyecto = req.body;
-        console.log('id, body', req.params.id, req.body);
+        const {proyecto} = req.query;
+        // console.log('id, body', req.params.id, proyecto);
 
         let tarea = await Tarea.findOne({_id: req.params.id, proyecto});
 

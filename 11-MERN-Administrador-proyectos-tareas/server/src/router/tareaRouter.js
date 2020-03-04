@@ -10,9 +10,7 @@ router.post('/', auth, [
     check('proyecto', 'El proyecto es obligatorio').not().isEmpty()
 ], crearTarea);
 
-router.get('/tareas_proyecto/:proyectoId', [
-    check('nombre', "El nombre de la tarea es obligatoria").not().isEmpty()
-], auth, obtenerTareas);
+router.get('/tareas_proyecto', auth, obtenerTareas);
 
 router.put('/:id', [
     check('nombre', "El nombre de la tarea es obligatoria").not().isEmpty(),

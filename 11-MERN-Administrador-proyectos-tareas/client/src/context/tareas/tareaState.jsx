@@ -15,8 +15,7 @@ import {
 const TareaState = props => {
 
     const initialState = {
-        tareas: [],
-        tareasProyecto: null,
+        tareasProyecto: [],
         errorTarea: false,
         tareaSeleccionada: null
     }
@@ -26,11 +25,11 @@ const TareaState = props => {
     // Crear las funciones
 
     // Obtener las tareas de un proyecto
-    const obtenerTareas = async proyectoId => {
+    const obtenerTareas = async proyecto => {
 
         try {
-            console.log('obenerTareas', proyectoId);
-            const resultado = await clienteAxios.get(`/api/tarea/tareas_proyecto/${proyectoId}`);
+            console.log('obenerTareas', proyecto);
+            const resultado = await clienteAxios.get(`/api/tarea/tareas_proyecto`, {params: { proyecto }});
             console.log('obtenerTareas', resultado.data);
 
             dispatch({
@@ -45,11 +44,11 @@ const TareaState = props => {
     }
 
     // Agregar tarea
-    const agregarTarea = tarea => {
+    const agregarTarea = async tarea => {
 
         try {
             console.log('tarea', tarea);
-            const resultado = clienteAxios.post('/api/tarea', tarea);
+            const resultado = await clienteAxios.post('/api/tarea', tarea);
             console.log(resultado.data);
 
             dispatch({
@@ -70,13 +69,18 @@ const TareaState = props => {
     }
 
     const eliminarTarea = async (id, proyecto) => {
-        console.log('eliminar id, proyecto', id, proyecto);
-        const respuesta = await clienteAxios.delete(`/api/tarea/${id}`, { data: proyecto});
-
-        dispatch({
-            type: ELIMINAR_TAREA,
-            payload: id
-        })
+        try {
+            console.log('eliminar id, proyecto', id, proyecto);
+            await clienteAxios.delete(`/api/tarea/${id}`, { params: { proyecto }});
+    
+            dispatch({
+                type: ELIMINAR_TAREA,
+                payload: id
+            })
+            
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const cambiarEstadoTarea = tarea => {
@@ -104,7 +108,6 @@ const TareaState = props => {
     return ( 
         <TareaContext.Provider
             value={{
-                tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
                 errorTarea: state.errorTarea,
                 tareaSeleccionada: state.tareaSeleccionada,

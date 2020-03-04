@@ -4,6 +4,8 @@ import TareaContext from '../../context/tareas/tareaContext';
 
 const Tareas = ({tarea}) => {
 
+    // console.log('TAREA', tarea);
+
     const { 
         eliminarTarea,
         obtenerTareas,
@@ -11,10 +13,11 @@ const Tareas = ({tarea}) => {
         guardarTareaActual 
     } = useContext(TareaContext);
 
-    const tareaEliminar = tarea => {  
+    const tareaEliminar = async tarea => {  
         // console.log('tarea', tarea);
-        eliminarTarea(tarea._id, { proyecto: tarea.proyecto});
-        obtenerTareas(tarea.proyecto);
+        
+        await eliminarTarea(tarea._id, tarea.proyecto);
+        await obtenerTareas(tarea.proyecto);
     }
 
     // Modifica el estado de las tareas
@@ -28,6 +31,7 @@ const Tareas = ({tarea}) => {
         }
 
         cambiarEstadoTarea(tarea);
+        obtenerTareas(tarea.proyecto);
     }
 
     const seleccionarTarea = tarea => {
