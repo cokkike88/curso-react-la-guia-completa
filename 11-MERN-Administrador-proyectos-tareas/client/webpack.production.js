@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -28,16 +29,7 @@ module.exports = {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                // use: ['style-loader', 'css-loader']
-                use: [MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1
-                        }
-                    } 
-                ]
+                use: ['style-loader', 'css-loader']                
             },
             {
                 test: /\.svg$/,
@@ -54,6 +46,9 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css',
             ignoreOrder: false
+        }),
+        new Dotenv({
+            path: './production.env'
         })
     ],
     devServer: {

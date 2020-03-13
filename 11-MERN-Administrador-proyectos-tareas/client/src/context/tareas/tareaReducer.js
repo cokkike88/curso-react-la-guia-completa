@@ -11,7 +11,7 @@ import {
 export default (state, action) =>{
     switch(action.type){
         case TAREAS_PROYECTO:
-            console.log('tareas_proyecto', action.payload);
+            // console.log('tareas_proyecto', action.payload);
             return {
                 ...state,
                 tareasProyecto: action.payload
@@ -33,7 +33,6 @@ export default (state, action) =>{
                 // tareasProyecto: state.tareasProyecto.filter(tarea => tarea._id !== action.payload)
             }
         case ACTUALIZAR_TAREA:
-        case ESTADO_TAREA:
             return {
                 ...state,
                 tareasProyecto: state.tareasProyecto.map(tarea => tarea._id === action.payload._id ? action.payload : tarea),

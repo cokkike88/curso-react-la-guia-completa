@@ -9,7 +9,7 @@ const Tareas = ({tarea}) => {
     const { 
         eliminarTarea,
         obtenerTareas,
-        cambiarEstadoTarea,
+        actualizarTarea,
         guardarTareaActual 
     } = useContext(TareaContext);
 
@@ -30,7 +30,7 @@ const Tareas = ({tarea}) => {
             tarea.estado = true;
         }
 
-        cambiarEstadoTarea(tarea);
+        actualizarTarea(tarea);
         obtenerTareas(tarea.proyecto);
     }
 

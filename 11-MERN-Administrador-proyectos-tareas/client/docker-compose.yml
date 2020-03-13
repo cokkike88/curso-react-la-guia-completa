@@ -8,4 +8,6 @@ services:
         volumes: 
             - $PWD:/web
         working_dir: /web
+        environment: 
+            NODE_ENV: development
         command: npm start
