@@ -1,10 +1,11 @@
 version: '3.7'
 services: 
-    administrador-proyectos-tareas: 
-        container_name: administrador-proyectos-tareas
-        image: node
+    listado-productos: 
+        container_name: listado-productos
+        build: .
         ports: 
             - "5566:5566"
+            - "3000:3000"
         volumes: 
             - $PWD:/web
         working_dir: /web

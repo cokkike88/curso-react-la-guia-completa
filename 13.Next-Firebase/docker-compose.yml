@@ -1,0 +1,15 @@
+version: '3.7'
+services: 
+    next-firebase:
+        container_name: next-firebase
+        build: .
+        image: next-firebase-image
+        ports: 
+            - "4000:3000"
+        volumes: 
+            - $PWD:/web
+        working_dir: /web/producthuntnext
+        restart: always
+        environment: 
+            NODE_ENV: development
+        command: npm run dev

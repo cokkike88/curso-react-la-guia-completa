@@ -1,0 +1,39 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Jugo de Zanahoria",
+      "precio": "50"
+    },
+    {
+      "nombre": "Jugo de Fresa",
+      "precio": "200",
+      "id": 5
+    },
+    {
+      "nombre": "Jugo de mango",
+      "precio": 10,
+      "id": 6
+    },
+    {
+      "nombre": "Jugo de banano",
+      "precio": 25,
+      "id": 7
+    },
+    {
+      "nombre": "Atol de platano",
+      "precio": 55,
+      "id": 11
+    },
+    {
+      "nombre": "Smothing",
+      "precio": 20,
+      "id": 12
+    },
+    {
+      "nombre": "Hamburguer",
+      "precio": 123,
+      "id": 13
+    }
+  ]
+}

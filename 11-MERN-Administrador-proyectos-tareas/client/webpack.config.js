@@ -1,3 +1,4 @@
-
 const env = process.env.NODE_ENV;
-module.exports = require(`./webpack.${env}.js`);
+const webpack = require(`./webpack.${env}.js`);
+console.log(webpack);
+module.exports = webpack;
